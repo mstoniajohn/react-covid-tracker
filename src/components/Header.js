@@ -1,18 +1,19 @@
 import React from 'react';
-import { FormControl, MenuItem, Select } from '@material-ui/core';
-// import { useGlobalContext } from '../context';
+import { FormControl, MenuItem, Select, Typography } from '@material-ui/core';
+import { useGlobalContext } from '../context';
 
 const Header = ({ country, onCountryChange, countries }) => {
-	// const { countries } = useGlobalContext();
+	const { countries: c1 } = useGlobalContext();
+	console.log(c1);
 	return (
-		<div className="app__header">
-			<h1>Covid-19 Tracker</h1>
+		<div className="flex justify-between">
+			<Typography variant="h5">Covid-19 Tracker</Typography>
 			<FormControl className="app__dropdown">
-				<Select variant="outlined" value={country} onChange={onCountryChange}>
+				<Select variant="standard" value={country} onChange={onCountryChange}>
 					<MenuItem value="worldwide">Worldwide</MenuItem>
 
-					{countries &&
-						countries.map((country) => (
+					{c1 &&
+						c1.map((country) => (
 							<MenuItem value={country.value}>{country.name}</MenuItem>
 						))}
 				</Select>

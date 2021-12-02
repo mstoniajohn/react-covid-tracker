@@ -3,7 +3,7 @@ import ReactMapGl, { Marker } from 'react-map-gl';
 import { FaMapPin } from 'react-icons/fa';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-const CovidMap = ({ country, flag, center, zoom }) => {
+const CovidMap = ({ country, flag, center, zoom, lat, long }) => {
 	// const [lat, setLat] = useState(null);
 	// const [lng, setLng] = useState(null);
 
@@ -12,8 +12,8 @@ const CovidMap = ({ country, flag, center, zoom }) => {
 	// const [loading, setLoading] = useState(true);
 
 	const [viewport, setViewport] = useState({
-		latitude: center.lat || 40.712772,
-		longitude: center.lng || -73.935242,
+		latitude: lat,
+		longitude: long,
 		zoom: zoom,
 		width: '100%',
 		height: '500px',
@@ -30,8 +30,8 @@ const CovidMap = ({ country, flag, center, zoom }) => {
 			>
 				<Marker
 					key={curCountry}
-					latitude={viewport.latitude}
-					longitude={viewport.longitude}
+					latitude={viewport?.latitude}
+					longitude={viewport?.longitude}
 				>
 					<FaMapPin className="pin-color" />
 					<img src={flag ? flag : ''} alt={curCountry} height="25" />

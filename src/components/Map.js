@@ -3,8 +3,11 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 
 import './Map.css';
 import { showDataOnMap } from '../util';
+import { useGlobalContext } from '../context';
 
 const Map = ({ countries, casesType, center, zoom }) => {
+	const { countries: c1 } = useGlobalContext();
+
 	return (
 		<div className="map">
 			<MapContainer center={center} zoom={zoom} scrollWheelZoom={false}>
@@ -13,7 +16,7 @@ const Map = ({ countries, casesType, center, zoom }) => {
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 
-				{showDataOnMap(countries, casesType)}
+				{showDataOnMap(c1, casesType)}
 			</MapContainer>
 		</div>
 	);

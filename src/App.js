@@ -4,7 +4,7 @@ import InfoBoxes from './components/InfoBoxes';
 import Table from './components/Table';
 import { sortData, prettyPrintStat } from './util';
 // import Map from './components/Map';
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import LineGraph from './components/LineGraph';
 import 'leaflet/dist/leaflet.css';
 import numeral from 'numeral';
@@ -16,7 +16,10 @@ function App() {
 	const [countries, setCountries] = useState([]);
 	const [tableData, setTableData] = useState([]);
 	const [casesType, setCasesType] = useState('cases');
-	const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+	const [mapCenter, setMapCenter] = useState([]);
+	const [lati, setLati] = useState(0);
+	const [loni, setLoni] = useState(0);
+
 	const [mapZoom, setMapZoom] = useState();
 	const [mapCountries, setMapCountries] = useState([]);
 	const [countryName, setCountryName] = useState('worldwide');
@@ -35,6 +38,9 @@ function App() {
 				setCountry(countryCode);
 				setCountryName(data.country);
 				setCountryInfo(data);
+				setLati(data.countryInfo.lat);
+				setLoni(data.countryInfo.long);
+
 				setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
 				setFlag(data.countryInfo.flag);
 				setMapZoom(8);
@@ -71,7 +77,7 @@ function App() {
 		};
 		getCountries();
 	}, []);
-	// console.log(country);
+	console.log(country, mapCenter);
 
 	return (
 		<div className="app">
@@ -119,12 +125,14 @@ function App() {
 					center={mapCenter}
 					zoom={mapZoom}
 					flag={flag}
+					lat={lati}
+					long={loni}
 				/>
 			</div>
 			<Card className="app__right">
 				<CardContent>
-					<div className="app__information">
-						<h3>Live Cases by Country</h3>
+					<div className="">
+						<Typography variant="h6">Live Cases by Country</Typography>
 						<Table countries={tableData} />
 						<h3>Worldwide new {casesType}</h3>
 						<LineGraph casesType={casesType} />

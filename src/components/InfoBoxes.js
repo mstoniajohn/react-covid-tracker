@@ -3,14 +3,16 @@ import React from 'react';
 
 const InfoBoxes = ({ title, cases, total }) => {
 	return (
-		<Card className="infoBox">
+		<Card className="p-2 mb-1 shadow text-center">
 			<CardContent>
-				<Typography className="infoBox__title" color="textSecondary">
+				<Typography variant="h6" color="textSecondary">
 					{title}
 				</Typography>
 			</CardContent>
-			<h2 className="infoBox__cases">{cases} Cases</h2>
-			<Typography className="infoBox__total" color="textSecondary">
+			<Typography variant="h6" className="font-bold">
+				{cases} Cases
+			</Typography>
+			<Typography className="" color="textSecondary">
 				{total} Total
 			</Typography>
 		</Card>
